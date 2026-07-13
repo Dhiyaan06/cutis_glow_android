@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../auth/providers/auth_provider.dart';
-
+import '../../layanan/screens/layanan_list_screen.dart';
 class DashboardPasienScreen extends ConsumerWidget {
   const DashboardPasienScreen({super.key});
 
@@ -11,7 +11,13 @@ class DashboardPasienScreen extends ConsumerWidget {
     final user = ref.watch(authProvider).user;
 
     final menuItems = [
-      _MenuItem(icon: Icons.medical_services, label: 'Layanan', onTap: () {}),
+      _MenuItem(
+        icon: Icons.medical_services,
+        label: 'Layanan',
+        onTap: () => Navigator.of(context).push(
+          MaterialPageRoute(builder: (_) => const LayananListScreen()),
+        ),
+      ),
       _MenuItem(icon: Icons.person_4, label: 'Dokter', onTap: () {}),
       _MenuItem(icon: Icons.calendar_month, label: 'Booking Saya', onTap: () {}),
       _MenuItem(icon: Icons.history, label: 'Riwayat Layanan', onTap: () {}),
