@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
 import 'features/auth/providers/auth_provider.dart';
 import 'features/auth/screens/login_screen.dart';
 import 'features/dashboard/screens/dashboard_admin_screen.dart';
@@ -46,14 +45,11 @@ class AuthGate extends ConsumerWidget {
       case AuthStatus.unauthenticated:
         return const LoginScreen();
       case AuthStatus.authenticated:
-        // Placeholder sementara -- dashboard per role dibuat di Tahap 7
-        case AuthStatus.authenticated:
         switch (authState.user?.role) {
           case 'admin':
             return const DashboardAdminScreen();
           case 'dokter':
             return const DashboardDokterScreen();
-          case 'pasien':
           default:
             return const DashboardPasienScreen();
         }
