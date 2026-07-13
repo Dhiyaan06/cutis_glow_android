@@ -4,6 +4,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'features/auth/providers/auth_provider.dart';
 import 'features/auth/screens/login_screen.dart';
+import 'features/dashboard/screens/dashboard_admin_screen.dart';
+import 'features/dashboard/screens/dashboard_dokter_screen.dart';
+import 'features/dashboard/screens/dashboard_pasien_screen.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -44,23 +47,16 @@ class AuthGate extends ConsumerWidget {
         return const LoginScreen();
       case AuthStatus.authenticated:
         // Placeholder sementara -- dashboard per role dibuat di Tahap 7
-        return Scaffold(
-          appBar: AppBar(title: const Text('Cutis Glow')),
-          body: Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text('Selamat datang, ${authState.user?.name ?? ''}'),
-                Text('Role: ${authState.user?.role ?? ''}'),
-                const SizedBox(height: 16),
-                ElevatedButton(
-                  onPressed: () => ref.read(authProvider.notifier).logout(),
-                  child: const Text('Logout'),
-                ),
-              ],
-            ),
-          ),
-        );
+        case AuthStatus.authenticated:
+        switch (authState.user?.role) {
+          case 'admin':
+            return const DashboardAdminScreen();
+          case 'dokter':
+            return const DashboardDokterScreen();
+          case 'pasien':
+          default:
+            return const DashboardPasienScreen();
+        }
     }
   }
 }
