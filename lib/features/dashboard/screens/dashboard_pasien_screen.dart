@@ -3,6 +3,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../auth/providers/auth_provider.dart';
 import '../../layanan/screens/layanan_list_screen.dart';
+import '../../dokter/screens/dokter_list_screen.dart';
+import '../../booking/screens/booking_list_screen.dart';
 class DashboardPasienScreen extends ConsumerWidget {
   const DashboardPasienScreen({super.key});
 
@@ -18,8 +20,20 @@ class DashboardPasienScreen extends ConsumerWidget {
           MaterialPageRoute(builder: (_) => const LayananListScreen()),
         ),
       ),
-      _MenuItem(icon: Icons.person_4, label: 'Dokter', onTap: () {}),
-      _MenuItem(icon: Icons.calendar_month, label: 'Booking Saya', onTap: () {}),
+      _MenuItem(
+        icon: Icons.person_4,
+        label: 'Dokter',
+        onTap: () => Navigator.of(context).push(
+          MaterialPageRoute(builder: (_) => const DokterListScreen()),
+        ),
+      ),
+     _MenuItem(
+        icon: Icons.calendar_month,
+        label: 'Booking Saya',
+        onTap: () => Navigator.of(context).push(
+          MaterialPageRoute(builder: (_) => const BookingListScreen()),
+        ),
+      ),
       _MenuItem(icon: Icons.history, label: 'Riwayat Layanan', onTap: () {}),
       _MenuItem(icon: Icons.notifications, label: 'Notifikasi', onTap: () {}),
     ];
