@@ -5,6 +5,9 @@ import '../../auth/providers/auth_provider.dart';
 import '../../riwayat/screens/riwayat_screen.dart';
 import '../../notifikasi/screens/notifikasi_screen.dart';
 import '../../booking/screens/booking_list_screen.dart';
+import '../../layanan/screens/layanan_manage_screen.dart';
+import '../../dokter/screens/dokter_manage_screen.dart';
+import '../../pasien/screens/pasien_manage_screen.dart';
 
 class DashboardAdminScreen extends ConsumerWidget {
   const DashboardAdminScreen({super.key});
@@ -14,8 +17,27 @@ class DashboardAdminScreen extends ConsumerWidget {
     final user = ref.watch(authProvider).user;
 
     final menuItems = [
-      _MenuItem(icon: Icons.medical_services, label: 'Kelola Layanan', onTap: () {}),
-      _MenuItem(icon: Icons.person_4, label: 'Kelola Dokter', onTap: () {}),
+      _MenuItem(
+        icon: Icons.medical_services,
+        label: 'Kelola Layanan',
+        onTap: () => Navigator.of(context).push(
+          MaterialPageRoute(builder: (_) => const LayananManageScreen()),
+        ),
+      ),
+      _MenuItem(
+        icon: Icons.person_4,
+        label: 'Kelola Dokter',
+        onTap: () => Navigator.of(context).push(
+          MaterialPageRoute(builder: (_) => const DokterManageScreen()),
+        ),
+      ),
+      _MenuItem(
+        icon: Icons.people,
+        label: 'Kelola Pasien',
+        onTap: () => Navigator.of(context).push(
+          MaterialPageRoute(builder: (_) => const PasienManageScreen()),
+        ),
+      ),
       _MenuItem(
         icon: Icons.calendar_month,
         label: 'Semua Booking',

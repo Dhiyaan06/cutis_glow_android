@@ -4,6 +4,7 @@ class JadwalDokterModel {
   final String hari;
   final String jamMulai;
   final String jamSelesai;
+  final String status;
 
   JadwalDokterModel({
     required this.idJadwal,
@@ -11,6 +12,7 @@ class JadwalDokterModel {
     required this.hari,
     required this.jamMulai,
     required this.jamSelesai,
+    this.status = 'aktif',
   });
 
   factory JadwalDokterModel.fromJson(Map<String, dynamic> json) {
@@ -24,6 +26,7 @@ class JadwalDokterModel {
       hari: json['hari'] ?? '',
       jamMulai: json['jam_mulai'] ?? '',
       jamSelesai: json['jam_selesai'] ?? '',
+      status: json['status'] ?? 'aktif',
     );
   }
 }

@@ -27,6 +27,16 @@ class LayananModel {
     );
   }
 
+  /// Dipakai saat kirim data create/update ke API (admin).
+  Map<String, dynamic> toJson() {
+    return {
+      'nama_layanan': namaLayanan,
+      'deskripsi': deskripsi,
+      'harga': harga,
+      'diskon': diskon,
+    };
+  }
+
   /// Harga setelah dipotong diskon (kalau ada)
   double get hargaSetelahDiskon {
     if (diskon == null || diskon == 0) return harga;

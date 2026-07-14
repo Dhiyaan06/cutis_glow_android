@@ -9,10 +9,20 @@ class ApiEndpoints {
 
   // Layanan
   static const String layanan = '/layanan';
+  static String layananDetail(int id) => '/layanan/$id';
 
   // Dokter
   static const String dokter = '/dokter';
   static const String dokterSchedules = '/dokter/schedules';
+  static String dokterDetail(int id) => '/dokter/$id';
+
+  // Jadwal Dokter (admin)
+  static const String jadwalDokter = '/jadwal-dokter';
+  static String jadwalDokterDetail(int id) => '/jadwal-dokter/$id';
+
+  // Pasien (admin)
+  static const String pasien = '/pasien';
+  static String pasienDetail(int id) => '/pasien/$id';
 
   // Booking
   static const String bookings = '/bookings';
