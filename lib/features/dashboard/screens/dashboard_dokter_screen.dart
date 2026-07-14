@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../auth/providers/auth_provider.dart';
+import '../../riwayat/screens/riwayat_screen.dart';
+import '../../notifikasi/screens/notifikasi_screen.dart';
+import '../../booking/screens/booking_list_screen.dart';
 
 class DashboardDokterScreen extends ConsumerWidget {
   const DashboardDokterScreen({super.key});
@@ -11,10 +14,28 @@ class DashboardDokterScreen extends ConsumerWidget {
     final user = ref.watch(authProvider).user;
 
     final menuItems = [
-      _MenuItem(icon: Icons.calendar_month, label: 'Jadwal Booking', onTap: () {}),
+      _MenuItem(
+        icon: Icons.calendar_month,
+        label: 'Jadwal Booking',
+        onTap: () => Navigator.of(context).push(
+          MaterialPageRoute(builder: (_) => const BookingListScreen()),
+        ),
+      ),
       _MenuItem(icon: Icons.schedule, label: 'Jadwal Praktek', onTap: () {}),
-      _MenuItem(icon: Icons.history, label: 'Riwayat Layanan', onTap: () {}),
-      _MenuItem(icon: Icons.notifications, label: 'Notifikasi', onTap: () {}),
+      _MenuItem(
+        icon: Icons.history,
+        label: 'Riwayat Layanan',
+        onTap: () => Navigator.of(context).push(
+          MaterialPageRoute(builder: (_) => const RiwayatScreen()),
+        ),
+      ),
+      _MenuItem(
+        icon: Icons.notifications,
+        label: 'Notifikasi',
+        onTap: () => Navigator.of(context).push(
+          MaterialPageRoute(builder: (_) => const NotifikasiScreen()),
+        ),
+      ),
     ];
 
     return Scaffold(

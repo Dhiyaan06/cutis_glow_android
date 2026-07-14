@@ -16,6 +16,9 @@ class ApiEndpoints {
 
   // Booking
   static const String bookings = '/bookings';
+  static String bookingKonfirmasi(int id) => '/bookings/$id/konfirmasi';
+  static String bookingBatal(int id) => '/bookings/$id/batal';
+  static String bookingSelesai(int id) => '/bookings/$id/selesai';
   static const String riwayatLayanan = '/riwayat-layanan';
 
   // Notifikasi

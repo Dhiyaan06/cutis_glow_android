@@ -5,6 +5,8 @@ import '../../auth/providers/auth_provider.dart';
 import '../../layanan/screens/layanan_list_screen.dart';
 import '../../dokter/screens/dokter_list_screen.dart';
 import '../../booking/screens/booking_list_screen.dart';
+import '../../riwayat/screens/riwayat_screen.dart';
+import '../../notifikasi/screens/notifikasi_screen.dart';
 class DashboardPasienScreen extends ConsumerWidget {
   const DashboardPasienScreen({super.key});
 
@@ -34,8 +36,20 @@ class DashboardPasienScreen extends ConsumerWidget {
           MaterialPageRoute(builder: (_) => const BookingListScreen()),
         ),
       ),
-      _MenuItem(icon: Icons.history, label: 'Riwayat Layanan', onTap: () {}),
-      _MenuItem(icon: Icons.notifications, label: 'Notifikasi', onTap: () {}),
+      _MenuItem(
+        icon: Icons.history,
+        label: 'Riwayat Layanan',
+        onTap: () => Navigator.of(context).push(
+          MaterialPageRoute(builder: (_) => const RiwayatScreen()),
+        ),
+      ),
+      _MenuItem(
+        icon: Icons.notifications,
+        label: 'Notifikasi',
+        onTap: () => Navigator.of(context).push(
+          MaterialPageRoute(builder: (_) => const NotifikasiScreen()),
+        ),
+      ),
     ];
 
     return Scaffold(

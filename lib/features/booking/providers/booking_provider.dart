@@ -60,3 +60,75 @@ final bookingFormProvider =
     StateNotifierProvider<BookingFormNotifier, BookingFormState>((ref) {
   return BookingFormNotifier(ref.watch(bookingServiceProvider));
 });
+
+/// State untuk aksi admin/dokter: konfirmasi, batal, selesai
+class BookingActionState {
+  final bool isLoading;
+  final String? errorMessage;
+  final bool isSuccess;
+
+  const BookingActionState({
+    this.isLoading = false,
+    this.errorMessage,
+    this.isSuccess = false,
+  });
+}
+
+class BookingActionNotifier extends StateNotifier<BookingActionState> {
+  final BookingService _service;
+  final Ref _ref;
+
+  BookingActionNotifier(this._service, this._ref) : super(const BookingActionState());
+
+  Future<void> konfirmasi(int idBooking) async {
+    state = const BookingActionState(isLoading: true);
+    try {
+      await _service.konfirmasi(idBooking);
+      state = const BookingActionState(isSuccess: true);
+      _ref.invalidate(bookingListProvider);
+    } on ApiException catch (e) {
+      state = BookingActionState(errorMessage: e.message);
+    }
+  }
+
+  Future<void> batal(int idBooking) async {
+    state = const BookingActionState(isLoading: true);
+    try {
+      await _service.batal(idBooking);
+      state = const BookingActionState(isSuccess: true);
+      _ref.invalidate(bookingListProvider);
+    } on ApiException catch (e) {
+      state = BookingActionState(errorMessage: e.message);
+    }
+  }
+
+  Future<void> selesai({
+    required int idBooking,
+    required int idLayanan,
+    required String tanggalTreatment,
+    required int qty,
+    String? catatan,
+  }) async {
+    state = const BookingActionState(isLoading: true);
+    try {
+      await _service.selesai(
+        idBooking: idBooking,
+        idLayanan: idLayanan,
+        tanggalTreatment: tanggalTreatment,
+        qty: qty,
+        catatan: catatan,
+      );
+      state = const BookingActionState(isSuccess: true);
+      _ref.invalidate(bookingListProvider);
+    } on ApiException catch (e) {
+      state = BookingActionState(errorMessage: e.message);
+    }
+  }
+
+  void reset() => state = const BookingActionState();
+}
+
+final bookingActionProvider =
+    StateNotifierProvider<BookingActionNotifier, BookingActionState>((ref) {
+  return BookingActionNotifier(ref.watch(bookingServiceProvider), ref);
+});

@@ -42,4 +42,49 @@ class BookingService {
           : ApiException(message: 'Gagal membuat booking.');
     }
   }
+
+  Future<void> konfirmasi(int idBooking) async {
+    try {
+      await _dio.post(ApiEndpoints.bookingKonfirmasi(idBooking));
+    } on DioException catch (e) {
+      throw e.error is ApiException
+          ? e.error as ApiException
+          : ApiException(message: 'Gagal mengonfirmasi booking.');
+    }
+  }
+
+  Future<void> batal(int idBooking) async {
+    try {
+      await _dio.post(ApiEndpoints.bookingBatal(idBooking));
+    } on DioException catch (e) {
+      throw e.error is ApiException
+          ? e.error as ApiException
+          : ApiException(message: 'Gagal membatalkan booking.');
+    }
+  }
+
+  /// Selesaikan booking + catat riwayat treatment yang diberikan
+  Future<void> selesai({
+    required int idBooking,
+    required int idLayanan,
+    required String tanggalTreatment, // format: yyyy-MM-dd
+    required int qty,
+    String? catatan,
+  }) async {
+    try {
+      await _dio.post(
+        ApiEndpoints.bookingSelesai(idBooking),
+        data: {
+          'id_layanan': idLayanan,
+          'tanggal_treatment': tanggalTreatment,
+          'qty': qty,
+          if (catatan != null && catatan.isNotEmpty) 'catatan': catatan,
+        },
+      );
+    } on DioException catch (e) {
+      throw e.error is ApiException
+          ? e.error as ApiException
+          : ApiException(message: 'Gagal menyelesaikan booking.');
+    }
+  }
 }
