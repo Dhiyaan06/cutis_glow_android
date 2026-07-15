@@ -25,6 +25,9 @@ dependencies:
   # Environment config (Base URL berbeda per platform)
   flutter_dotenv: ^5.2.1
 
+  # Font Figtree -- disamain sama font yang dipakai web Laravel (Tailwind)
+  google_fonts: ^6.2.1
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

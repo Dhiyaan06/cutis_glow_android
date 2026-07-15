@@ -8,12 +8,15 @@ import '../../booking/screens/booking_list_screen.dart';
 import '../../layanan/screens/layanan_manage_screen.dart';
 import '../../dokter/screens/dokter_manage_screen.dart';
 import '../../pasien/screens/pasien_manage_screen.dart';
+import '../../profile/screens/profile_screen.dart';
+import '../../realtime/providers/realtime_provider.dart';
 
 class DashboardAdminScreen extends ConsumerWidget {
   const DashboardAdminScreen({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    ref.watch(realtimeListenerProvider);
     final user = ref.watch(authProvider).user;
 
     final menuItems = [
@@ -65,6 +68,12 @@ class DashboardAdminScreen extends ConsumerWidget {
       appBar: AppBar(
         title: const Text('Cutis Glow - Admin'),
         actions: [
+          IconButton(
+            icon: const Icon(Icons.person),
+            onPressed: () => Navigator.of(context).push(
+              MaterialPageRoute(builder: (_) => const ProfileScreen()),
+            ),
+          ),
           IconButton(
             icon: const Icon(Icons.logout),
             onPressed: () => ref.read(authProvider.notifier).logout(),

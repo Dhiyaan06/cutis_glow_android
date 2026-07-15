@@ -27,6 +27,18 @@ class DokterService {
     }
   }
 
+  /// [Dokter] Ambil profil dokter milik akun yang sedang login.
+  Future<DokterModel> getMyProfile() async {
+    try {
+      final response = await _dio.get(ApiEndpoints.myDokterProfile);
+      return DokterModel.fromJson(response.data['data']);
+    } on DioException catch (e) {
+      throw e.error is ApiException
+          ? e.error as ApiException
+          : ApiException(message: 'Gagal memuat profil dokter.');
+    }
+  }
+
   Future<List<JadwalDokterModel>> getSchedules({required int idDokter}) async {
     try {
       final response = await _dio.get(

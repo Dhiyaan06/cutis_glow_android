@@ -7,11 +7,14 @@ import '../../dokter/screens/dokter_list_screen.dart';
 import '../../booking/screens/booking_list_screen.dart';
 import '../../riwayat/screens/riwayat_screen.dart';
 import '../../notifikasi/screens/notifikasi_screen.dart';
+import '../../profile/screens/profile_screen.dart';
+import '../../realtime/providers/realtime_provider.dart';
 class DashboardPasienScreen extends ConsumerWidget {
   const DashboardPasienScreen({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    ref.watch(realtimeListenerProvider);
     final user = ref.watch(authProvider).user;
 
     final menuItems = [
@@ -56,6 +59,12 @@ class DashboardPasienScreen extends ConsumerWidget {
       appBar: AppBar(
         title: const Text('Cutis Glow - Pasien'),
         actions: [
+          IconButton(
+            icon: const Icon(Icons.person),
+            onPressed: () => Navigator.of(context).push(
+              MaterialPageRoute(builder: (_) => const ProfileScreen()),
+            ),
+          ),
           IconButton(
             icon: const Icon(Icons.logout),
             onPressed: () => ref.read(authProvider.notifier).logout(),

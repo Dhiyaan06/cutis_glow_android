@@ -5,12 +5,40 @@ import '../../auth/providers/auth_provider.dart';
 import '../../riwayat/screens/riwayat_screen.dart';
 import '../../notifikasi/screens/notifikasi_screen.dart';
 import '../../booking/screens/booking_list_screen.dart';
+import '../../dokter/providers/dokter_provider.dart';
+import '../../dokter/screens/dokter_jadwal_screen.dart';
+import '../../profile/screens/profile_screen.dart';
+import '../../realtime/providers/realtime_provider.dart';
 
 class DashboardDokterScreen extends ConsumerWidget {
   const DashboardDokterScreen({super.key});
 
+  Future<void> _openJadwalPraktek(BuildContext context, WidgetRef ref) async {
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (_) => const Center(child: CircularProgressIndicator()),
+    );
+
+    try {
+      final dokter = await ref.read(dokterServiceProvider).getMyProfile();
+      if (!context.mounted) return;
+      Navigator.pop(context); // tutup loading dialog
+      Navigator.of(context).push(
+        MaterialPageRoute(builder: (_) => DokterJadwalScreen(dokter: dokter)),
+      );
+    } catch (e) {
+      if (!context.mounted) return;
+      Navigator.pop(context); // tutup loading dialog
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(e.toString().replaceAll('ApiException: ', ''))),
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    ref.watch(realtimeListenerProvider);
     final user = ref.watch(authProvider).user;
 
     final menuItems = [
@@ -21,7 +49,11 @@ class DashboardDokterScreen extends ConsumerWidget {
           MaterialPageRoute(builder: (_) => const BookingListScreen()),
         ),
       ),
-      _MenuItem(icon: Icons.schedule, label: 'Jadwal Praktek', onTap: () {}),
+      _MenuItem(
+        icon: Icons.schedule,
+        label: 'Jadwal Praktek',
+        onTap: () => _openJadwalPraktek(context, ref),
+      ),
       _MenuItem(
         icon: Icons.history,
         label: 'Riwayat Layanan',
@@ -42,6 +74,12 @@ class DashboardDokterScreen extends ConsumerWidget {
       appBar: AppBar(
         title: const Text('Cutis Glow - Dokter'),
         actions: [
+          IconButton(
+            icon: const Icon(Icons.person),
+            onPressed: () => Navigator.of(context).push(
+              MaterialPageRoute(builder: (_) => const ProfileScreen()),
+            ),
+          ),
           IconButton(
             icon: const Icon(Icons.logout),
             onPressed: () => ref.read(authProvider.notifier).logout(),

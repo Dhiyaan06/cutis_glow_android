@@ -16,6 +16,9 @@ class ApiEndpoints {
   static const String dokterSchedules = '/dokter/schedules';
   static String dokterDetail(int id) => '/dokter/$id';
 
+  /// [Dokter] Profil dokter milik akun yang sedang login.
+  static const String myDokterProfile = '/me/dokter';
+
   // Jadwal Dokter (admin)
   static const String jadwalDokter = '/jadwal-dokter';
   static String jadwalDokterDetail(int id) => '/jadwal-dokter/$id';
@@ -34,4 +37,8 @@ class ApiEndpoints {
   // Notifikasi
   static const String notifikasi = '/notifikasi';
   static String notifikasiRead(int id) => '/notifikasi/$id/read';
+
+  static const String profile = '/profile';
+
+  static const String realtimeUpdates = '/realtime-updates';
 }
