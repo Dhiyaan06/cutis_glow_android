@@ -374,9 +374,7 @@ php artisan migrate:fresh --seed
 
 Tambahkan tautan video demonstrasi proyek.
 
-```text
-https://youtu.be/xxxxxxxxxxx
-```
+https://youtu.be/bFyvM95-og4
 
 ---
 
