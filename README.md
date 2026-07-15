@@ -372,8 +372,6 @@ php artisan migrate:fresh --seed
 
 # 🎥 Demo
 
-Tambahkan tautan video demonstrasi proyek.
-
 https://youtu.be/bFyvM95-og4
 
 ---
