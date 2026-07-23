@@ -385,3 +385,6 @@ Seluruh kode sumber dan dokumentasi pada repositori ini digunakan untuk keperlua
 
 link github laravel :
 https://github.com/Dhiyaan06/cutis-glow.git
+
+Link Document IEE
+https://github.com/user-attachments/files/30312574/Laporan_UAS_PPBCS_Kelompok4_IF23B.pdf
