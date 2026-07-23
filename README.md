@@ -388,3 +388,5 @@ https://github.com/Dhiyaan06/cutis-glow.git
 
 Link Document IEE
 https://github.com/user-attachments/files/30312574/Laporan_UAS_PPBCS_Kelompok4_IF23B.pdf
+
+[![Download APK](https://img.shields.io/badge/Download-APK_v1.0.0-success?style=for-the-badge&logo=android)](https://github.com/Dhiyaan06/cutis_glow_android/releases/download/v1.0.0/app-release.apk)
